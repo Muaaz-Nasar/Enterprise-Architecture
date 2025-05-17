@@ -1,27 +1,14 @@
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-class Task implements Runnable {
-    private int taskId;
-
-    public Task(int taskId) {
-        this.taskId = taskId;
-    }
-
+public class SimpleThread extends Thread {
     @Override
     public void run() {
-        System.out.println("Task " + taskId + " is being processed by " + Thread.currentThread().getName());
+        System.out.println(Thread.currentThread().getId() + " is executing the thread.");
     }
-}
 
-public class ThreadPoolExample {
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        SimpleThread thread1 = new SimpleThread();
+        SimpleThread thread2 = new SimpleThread();
 
-        for (int i = 1; i <= 5; i++) {
-            executorService.submit(new Task(i));
-        }
-
-        executorService.shutdown();
+        thread1.start(); // Starts thread1
+        thread2.start(); // Starts thread2
     }
 }
